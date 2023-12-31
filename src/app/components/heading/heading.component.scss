@@ -1,0 +1,23 @@
+@use "../../../styles/variables";
+
+.container {
+  display: flex;
+  height: 7.2rem;
+  align-items: center;
+  padding: 1.6rem 2.4rem;
+  justify-content: space-between;
+  background: radial-gradient(166.82% 166.82% at 103.9% -10.39%, #E84D70 0%, #A337F6 53.09%, #28A7ED 100%);
+
+  .text2 {
+    color: variables.$white;
+    font-family: "Jost-Bold";
+  }
+
+  .text3 {
+    color: rgba(variables.$white, 0.75);
+  }
+
+  img {
+    cursor: pointer;
+  }
+}

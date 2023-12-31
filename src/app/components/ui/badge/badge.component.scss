@@ -1,0 +1,19 @@
+@use "../../../../styles/variables";
+
+.badge {
+  font-weight: 600;
+  font-size: 1.3rem;
+  border-radius: 1rem;
+  display: inline-block;
+  color: variables.$blue;
+  padding: 0.6rem 1.6rem;
+  background: variables.$gray;
+
+  &--active {
+    background: variables.$blue;
+  }
+
+  &:hover {
+    background: #CFD7FF;
+  }
+}

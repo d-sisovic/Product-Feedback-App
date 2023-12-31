@@ -1,0 +1,11 @@
+<div class="container">
+  @for(dropdownValue of dropdownValues; track dropdownValue.value) {
+  <div class="container__item" (click)="onSelectItem(dropdownValue)">
+    <div class="container__label">{{dropdownValue.label}}</div>
+
+    @if(dropdownValue.value === selectedValue) {
+    <img src="assets/images/shared/icon-check.svg" alt="icon-check">
+    }
+  </div>
+  }
+</div>

@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { CardHttpService } from './services/card-http.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ChangeDetectionStrategy, Component, DestroyRef, OnInit, inject } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +12,14 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrl: './app.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AppComponent {
-  title = 'product-feedback-app';
+export class AppComponent implements OnInit {
+
+  private readonly destroyRef = inject(DestroyRef);
+  private readonly cardHttpService = inject(CardHttpService);
+
+  public ngOnInit(): void {
+      this.cardHttpService.fetchDataUrl$()
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe();
+  }
 }

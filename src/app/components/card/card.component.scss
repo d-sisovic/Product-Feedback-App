@@ -1,0 +1,26 @@
+@use "../../../styles/variables";
+
+.container {
+  padding: 2.4rem;
+  border-radius: 1rem;
+  background: variables.$white;
+
+  .text3 {
+    font-family: "Jost-Bold";
+    color: variables.$dark-blue-2;
+  }
+
+  .description {
+    margin-top: 0.9rem;
+    margin-bottom: 0.8rem;
+    font-family: "Jost-Regular";
+    color: variables.$gray-dark;
+  }
+
+  &__footer {
+    display: flex;
+    margin-top: 1.6rem;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
