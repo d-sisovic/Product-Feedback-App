@@ -1,0 +1,15 @@
+<div class="container">
+  <h1 class="text3">{{card.title}}</h1>
+
+  @if(card.description; as description) {
+    <p class="text3 description">{{description}}</p>
+  }
+
+  <app-badge [label]="card.category | titlecase"></app-badge>
+
+  <div class="container__footer">
+    <app-badge-upvote [value]="card.upvotes"></app-badge-upvote>
+
+    <app-badge-comment [numberOfComments]="(card.comments || []).length"></app-badge-comment>
+  </div>
+</div>

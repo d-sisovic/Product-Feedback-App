@@ -1,0 +1,12 @@
+@use "../../../../styles/variables";
+
+.container {
+  gap: 0.4rem;
+  font-size: 1.3rem;
+  line-height: normal;
+  align-items: center;
+  display: inline-flex;
+  letter-spacing: -0.181px;
+  font-family: "Jost-Bold";
+  color: variables.$dark-blue-2;
+}

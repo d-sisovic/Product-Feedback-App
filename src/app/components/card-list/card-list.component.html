@@ -1,0 +1,5 @@
+<div class="container">
+  @for(card of cardData(); track card.id) {
+    <app-card [card]="card"></app-card>
+  }
+</div>

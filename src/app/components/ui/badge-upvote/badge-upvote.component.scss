@@ -1,0 +1,22 @@
+@use "../../../../styles/variables";
+
+.badge {
+  gap: 1rem;
+  border-radius: 1rem;
+  display: inline-flex;
+  background: #F2F4FE;
+  padding: 0.6rem 1.3rem 0.7rem 1.6rem;
+
+  .label {
+    font-size: 1.3rem;
+    font-family: "Jost-Bold";
+    letter-spacing: -0.181px;
+    color: variables.$dark-blue-2;
+  }
+
+  .img {
+    align-items: center;
+    display: inline-flex;
+    justify-content: center;
+  }
+}

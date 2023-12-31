@@ -1,0 +1,29 @@
+@use "../../../../styles/variables";
+
+.container {
+  position: relative;
+
+  .heading {
+    gap: 0.9rem;
+    cursor: pointer;
+    border-radius: 1rem;
+    display: inline-flex;
+    background: #373F68;
+
+    .sort {
+      color: #F2F4FE;
+      font-weight: 400;
+      font-size: 1.4rem;
+      font-style: normal;
+      line-height: normal;
+
+      &--bold {
+        font-weight: 700;
+      }
+    }
+
+    .arrow {
+
+    }
+  }
+}
