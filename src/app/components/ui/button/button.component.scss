@@ -13,7 +13,19 @@
   padding: 1.05rem 1.7rem;
   background: variables.$purple;
 
+  &:disabled {
+    opacity: 0.5;
+  }
+
   &:hover {
     background: #C75AF6;
+  }
+
+  &--blue {
+    background: variables.$blue;
+
+    &:hover {
+      background: #7C91F9;
+    }
   }
 }

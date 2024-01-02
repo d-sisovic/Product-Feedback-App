@@ -1,0 +1,10 @@
+@use "../../../styles/variables";
+
+.container {
+  gap: 2.4rem;
+  display: flex;
+  padding: 2.4rem;
+  min-height: 100vh;
+  flex-direction: column;
+  background: variables.$gray-2;
+}

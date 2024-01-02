@@ -1,0 +1,11 @@
+@use "../../../styles/variables";
+
+.container {
+  padding: 2.4rem;
+  background: variables.$white;
+
+  .h3 {
+    margin-bottom: 2.4rem;
+    color: variables.$dark-blue-2;
+  }
+}

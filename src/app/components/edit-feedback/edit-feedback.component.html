@@ -1,0 +1,11 @@
+<div class="container">
+  <app-back-header>
+    <app-button label="Edit Feedback" [color]="getButtonColor.BLUE"></app-button>
+  </app-back-header>
+
+  @if(selectedCard) {
+    <app-card [card]="selectedCard"></app-card>
+
+    <app-comments-list [comments]="selectedCard.comments || []"></app-comments-list>
+  }
+</div>
