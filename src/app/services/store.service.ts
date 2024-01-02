@@ -30,6 +30,10 @@ export class StoreService {
     this.filterStore.update(previous => ({ ...previous, [key]: value }));
   }
 
+  public getSelectedCard(cardId: string): IDataProductRequest | null {
+    return this.getCardsStore().find(item => item.id.toString() === cardId) || null;
+  }
+
   public get getAllAvailableCategories(): Signal<ILabelValue[]> {
     return computed(() => {
       const categories = this.getCardsStore().reduce((accumulator, item) => {

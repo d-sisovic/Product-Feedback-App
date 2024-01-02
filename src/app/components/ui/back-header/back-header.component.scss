@@ -1,0 +1,16 @@
+@use "../../../../styles/variables";
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &__back {
+    gap: 1.6rem;
+    font-weight: 700;
+    font-size: 1.3rem;
+    align-items: center;
+    display: inline-flex;
+    color: variables.$gray-dark;
+  }
+}

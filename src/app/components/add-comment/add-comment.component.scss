@@ -1,0 +1,17 @@
+@use "../../../styles/variables";
+
+.container {
+  padding: 2.4rem;
+  margin-top: 2.4rem;
+  border-radius: 1rem;
+  background: variables.$white;
+
+  .h3 {
+    color: variables.$dark-blue-2;
+  }
+
+  .textarea {
+    margin-top: 2.4rem;
+    margin-bottom: 1.6rem;
+  }
+}
