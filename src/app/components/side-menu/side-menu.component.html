@@ -1,0 +1,33 @@
+<div class="container" [@fadeInOut] (click)="onCloseSideMenu($event)">
+  <div class="content">
+    <div class="category">
+      @for(category of availableCategories(); track category.value) {
+      <app-badge [label]="category.label" [value]="category.value" [selected]="selectedCategory === category.value"
+        (selectBadge)="onSetBadge($event)">
+      </app-badge>
+      }
+    </div>
+
+    <div class="roadmap">
+      <div class="heading">
+        <h3 class="h3">Roadmap</h3>
+
+        <span class="text3 view">View</span>
+      </div>
+
+      <div class="body">
+        @for(status of matchingStatuses(); let index = $index; track status.label) {
+          <div class="item">
+            <div class="item__container">
+              <span class="item__img" [ngStyle]="{'background-color': index | color}"></span>
+
+              <span class="item__label text1">{{status.label | titlecase}}</span>
+            </div>
+
+            <span class="item__quantity text1">{{status.quantity}}</span>
+          </div>
+          }
+      </div>
+    </div>
+  </div>
+</div>

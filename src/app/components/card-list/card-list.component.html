@@ -1,5 +1,7 @@
-<div class="container">
-  @for(card of cardData(); track card.id) {
-    <app-card [card]="card"></app-card>
+<div class="container" [ngClass]="{'container--nooverflow': showSideMenu()}">
+  @for(card of cardData() | filterStore:filterStore(); track card.id) {
+  <app-card [card]="card"></app-card>
+  } @empty {
+  <app-empty-card-list></app-empty-card-list>
   }
 </div>

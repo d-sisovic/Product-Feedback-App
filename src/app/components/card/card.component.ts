@@ -1,4 +1,3 @@
-import { TitleCasePipe } from '@angular/common';
 import { BadgeComponent } from '../ui/badge/badge.component';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { IDataProductRequest } from '../../ts/models/data-product-request.model';
@@ -9,7 +8,6 @@ import { BadgeCommentComponent } from '../ui/badge-comment/badge-comment.compone
   selector: 'app-card',
   standalone: true,
   imports: [
-    TitleCasePipe,
     BadgeComponent,
     BadgeUpvoteComponent,
     BadgeCommentComponent
