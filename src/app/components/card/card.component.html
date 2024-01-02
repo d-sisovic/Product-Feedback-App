@@ -5,7 +5,7 @@
     <p class="text3 description">{{description}}</p>
   }
 
-  <app-badge [label]="card.category | titlecase"></app-badge>
+  <app-badge [label]="card.category" [value]="card.category"></app-badge>
 
   <div class="container__footer">
     <app-badge-upvote [value]="card.upvotes"></app-badge-upvote>

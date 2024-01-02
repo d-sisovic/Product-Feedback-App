@@ -7,4 +7,9 @@
   padding: 3.2rem 2.4rem;
   background: variables.$gray-2;
   min-height: calc(100vh - 12.8rem);
+
+  &--nooverflow {
+    height: 0;
+    overflow: hidden;
+  }
 }

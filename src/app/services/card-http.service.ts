@@ -1,4 +1,3 @@
-
 import { Observable, tap } from 'rxjs';
 import { StoreService } from './store.service';
 import { HttpClient } from '@angular/common/http';
@@ -10,14 +9,14 @@ import { IDataResponse } from '../ts/models/data-response.model';
 })
 export class CardHttpService {
 
-  private dataUrl: string = 'assets/data.json';
+  private readonly dataUrl: string = 'assets/data.json';
 
   private readonly http = inject(HttpClient);
   private readonly storeService = inject(StoreService);
 
   constructor() { }
 
-  public fetchDataUrl$(): Observable<any> {
+  public fetchDataUrl$(): Observable<IDataResponse> {
     return this.http.get<IDataResponse>(this.dataUrl)
     .pipe(
       tap(response => {

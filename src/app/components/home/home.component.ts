@@ -1,13 +1,16 @@
+import { UtilUiService } from '../../services/util-ui.service';
 import { HeadingComponent } from '../heading/heading.component';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CardListComponent } from '../card-list/card-list.component';
+import { SideMenuComponent } from '../side-menu/side-menu.component';
 import { SubheadingComponent } from '../subheading/subheading.component';
+import { ChangeDetectionStrategy, Component, OnInit, WritableSignal, inject } from '@angular/core';
 
 @Component({
   selector: 'app-home',
   standalone: true,
   imports: [
     HeadingComponent,
+    SideMenuComponent,
     CardListComponent,
     SubheadingComponent
   ],
@@ -15,6 +18,13 @@ import { SubheadingComponent } from '../subheading/subheading.component';
   styleUrl: './home.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
 
+  private readonly utilUiService = inject(UtilUiService);
+
+  public showSideMenu!: WritableSignal<boolean>;
+
+  public ngOnInit(): void {
+    this.showSideMenu = this.utilUiService.getSideMenuVisible;
+  }
 }

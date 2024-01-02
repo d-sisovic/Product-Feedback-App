@@ -8,7 +8,7 @@
 
   @if(showDropdown) {
   <app-dropdown [dropdownValues]="dropdownValues" [selectedValue]="selectedItem.value"
-    (selectItemEvent)="onSetSelectedItem($event)">
+    (closeDropdownEvent)="onCloseDropdown()" (selectItemEvent)="onSetSortMethod($event)">
   </app-dropdown>
   }
 </div>

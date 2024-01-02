@@ -1,0 +1,89 @@
+@use "../../../styles/variables";
+
+.container {
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 7.2rem;
+  position: fixed;
+  background: rgba(#000000, 0.5);
+
+  .content {
+    right: 0;
+    height: 100%;
+    width: 27.1rem;
+    padding: 2.4rem;
+    position: absolute;
+    background: variables.$gray-2;
+
+    .roadmap,
+    .category {
+      flex-wrap: wrap;
+      border-radius: 1rem;
+      background: variables.$white;
+    }
+
+    .category {
+      display: flex;
+      gap: 0.8rem 1.4rem;
+      margin-bottom: 2.4rem;
+      padding: 2.4rem 1.8rem 3.6rem 2.4rem;
+    }
+
+    .roadmap {
+      padding: 1.9rem 2.4rem 2.4rem 2.4rem;
+
+      .heading {
+        display: flex;
+        align-items: center;
+        margin-bottom: 2.4rem;
+        justify-content: space-between;
+
+        .h3 {
+          color: variables.$dark-blue-2;
+        }
+
+        .view {
+          font-weight: 600;
+          display: inline-block;
+          color: variables.$blue;
+          text-decoration: underline;
+        }
+      }
+
+      .body {
+        gap: 0.8rem;
+        display: flex;
+        flex-direction: column;
+
+        .item {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+
+          &__container {
+            gap: 1.6rem;
+            display: flex;
+            align-items: center;
+          }
+
+          &__img {
+            width: 0.8rem;
+            height: 0.8rem;
+            border-radius: 100%;
+            display: inline-block;
+          }
+
+          &__label {
+            color: variables.$gray-dark;
+          }
+
+          &__quantity {
+            font-weight: 700;
+            color: variables.$gray-dark;
+          }
+        }
+      }
+    }
+  }
+}
