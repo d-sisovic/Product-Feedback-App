@@ -1,7 +1,7 @@
 import { ActivatedRoute } from '@angular/router';
 import { StoreService } from '../../services/store.service';
+import { InputComponent } from '../ui/input/input.component';
 import { ButtonComponent } from '../ui/button/button.component';
-import { TextareaComponent } from '../ui/textarea/textarea.component';
 import { AddCommentFormService } from './services/add-comment-form.service';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
@@ -10,8 +10,8 @@ import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/cor
   selector: 'app-add-comment',
   standalone: true,
   imports: [
+    InputComponent,
     ButtonComponent,
-    TextareaComponent,
     ReactiveFormsModule
   ],
   templateUrl: './add-comment.component.html',

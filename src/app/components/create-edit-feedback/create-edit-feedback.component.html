@@ -1,0 +1,48 @@
+<div class="container">
+  <app-back-header></app-back-header>
+
+  <div class="content">
+    @if(isAddMode) {
+    <img src="assets/images/shared/icon-new-feedback.svg" alt="icon-new-feedback" class="img">
+    <h3 class="h3">Create New Feedback</h3>
+
+    } @else {
+    <img src="assets/images/shared/icon-edit-feedback.svg" alt="icon-edit-feedback" class="img">
+    <h3 class="h3">Editing '{{selectedCard()?.title}}'</h3>
+    }
+
+    <form [formGroup]="createEditFeedbackForm" class="form">
+      <div class="form__item">
+        <p class="text3">Feedback Title</p>
+
+        <span class="text3">Add a short, descriptive headline</span>
+
+        <app-input [controlName]="'title'"></app-input>
+      </div>
+
+      <div class="form__item">
+        <p class="text3">Category</p>
+
+        <span class="text3">Choose a category for your feedback</span>
+
+        <app-select (setSelectedValue)="onSetCategory($event)" [preselectedValue]="selectedCard()?.category || null">
+        </app-select>
+      </div>
+
+      <div class="form__item">
+        <p class="text3">Feedback Detail</p>
+
+        <span class="text3">Include any specific comments on what should be improved, added, etc.</span>
+
+        <app-input [controlName]="'detail'" [textareaMode]="true"></app-input>
+      </div>
+    </form>
+
+    <div class="footer">
+      <app-button label="Add Feedback" [disabled]="!createEditFeedbackForm.valid"
+        (clickEvent)="onSubmit()"></app-button>
+
+      <app-button label="Cancel" [color]="getButtonColor.GRAY" (clickEvent)="onCancel()"></app-button>
+    </div>
+  </div>
+</div>

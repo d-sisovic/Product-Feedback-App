@@ -1,0 +1,55 @@
+@use "../../../styles/variables";
+
+.container {
+  min-height: 100vh;
+  background: variables.$gray-2;
+  padding: 3.4rem 2.4rem 7.7rem 2.4rem;
+
+  .content {
+    position: relative;
+    margin-top: 5.5rem;
+    border-radius: 1rem;
+    background: variables.$white;
+    padding: 4.4rem 2.4rem 2.4rem 2.4rem;
+
+    .h3 {
+      color: variables.$dark-blue-2;
+    }
+
+    .img {
+      top: -2rem;
+      width: 4rem;
+      left: 2.4rem;
+      height: 4rem;
+      position: absolute;
+    }
+
+    .form {
+      gap: 2.4rem;
+      display: flex;
+      margin-top: 2.4rem;
+      flex-direction: column;
+
+      &__item {
+        p.text3 {
+          font-weight: 700;
+          margin-bottom: 0.3rem;
+          color: variables.$dark-blue-2;
+        }
+
+        span.text3 {
+          display: inline-block;
+          margin-bottom: 1.6rem;
+          color: variables.$gray-dark;
+        }
+      }
+    }
+
+    .footer {
+      gap: 1.6rem;
+      display: flex;
+      margin-top: 4rem;
+      flex-direction: column;
+    }
+  }
+}

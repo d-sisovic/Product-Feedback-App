@@ -1,0 +1,16 @@
+@if(selectedDropdownItem(); as selectedDropdownItem) {
+  <div class="container">
+    <div class="select" [ngClass]="{'select--active': showDropdown}" (click)="onToggleDropdown()">
+      <span>{{selectedDropdownItem.label | titlecase}}</span>
+
+      <img src="assets/images/shared/icon-arrow-down.svg" alt="icon-arrow-down"
+        [@rotateChevron]="showDropdown ? 'open' : 'closed'">
+    </div>
+
+    @if(showDropdown) {
+    <app-dropdown [dropdownValues]="dropdownValues" [selectedValue]="selectedDropdownItem.value"
+      (closeDropdownEvent)="onToggleDropdown()" (selectItemEvent)="onSetValue($event)">
+    </app-dropdown>
+    }
+  </div>
+}

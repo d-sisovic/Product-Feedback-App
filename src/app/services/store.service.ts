@@ -4,6 +4,7 @@ import { Category } from '../ts/enums/category.enum';
 import { ILabelValue } from '../ts/models/label-value.model';
 import { IDataComment } from '../ts/models/data-comment.model';
 import { IFilterStore } from '../ts/models/filter-store.model';
+import { IFeedbackForm } from '../ts/models/feedback-form.model';
 import { IDataCurrentUser } from '../ts/models/data-current-user.model';
 import { IDataProductRequest } from '../ts/models/data-product-request.model';
 import { Injectable, Signal, WritableSignal, computed, signal } from '@angular/core';
@@ -47,7 +48,9 @@ export class StoreService {
     }));
   }
 
-  public get getAllAvailableCategories(): Signal<ILabelValue[]> {
+  public getAllAvailableCategories(includeAll: boolean = true): Signal<ILabelValue[]> {
+    const allCategory = includeAll ? [{ label: Category.ALL, value: Category.ALL }] : [];
+
     return computed(() => {
       const categories = this.getCardsStore().reduce((accumulator, item) => {
         const { category } = item;
@@ -58,8 +61,12 @@ export class StoreService {
         return [...accumulator, { label: category, value: category }];
       }, [] as ILabelValue[]);
 
-      return [{ label: Category.ALL, value: Category.ALL }, ...categories];
+      return [...allCategory, ...categories];
     });
+  }
+
+  public createFeedback(value: IFeedbackForm): void {
+    this.cardsStore.update(previous => ([this.getNewFeedback(previous, value), ...previous]));
   }
 
   public get getAvailableStatuses(): Signal<IStatus[]> {
@@ -79,6 +86,13 @@ export class StoreService {
 
   public get getFilterStore(): WritableSignal<IFilterStore> {
     return this.filterStore;
+  }
+
+  private getNewFeedback(cardData: IDataProductRequest[], value: IFeedbackForm): IDataProductRequest {
+    const { title, detail, category } = value;
+    const id = Math.max(...cardData.map(item => item.id)) + 1;
+
+    return { id, title, category, upvotes: 0, status: 'suggestion', description: detail };
   }
 
   private getNewComment(comments: IDataComment[], content: string): IDataComment {

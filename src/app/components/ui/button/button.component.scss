@@ -1,6 +1,7 @@
 @use "../../../../styles/variables";
 
 .button {
+  width: 100%;
   border: none;
   cursor: pointer;
   font-weight: 700;
@@ -26,6 +27,14 @@
 
     &:hover {
       background: #7C91F9;
+    }
+  }
+
+  &--gray {
+    background: variables.$dark-blue-2;
+
+    &:hover {
+      background: #656EA3;
     }
   }
 }

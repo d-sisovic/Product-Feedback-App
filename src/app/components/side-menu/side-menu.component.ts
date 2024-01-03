@@ -46,7 +46,7 @@ export class SideMenuComponent implements OnInit {
     this.setInitialCategory();
 
     this.matchingStatuses = this.storeService.getAvailableStatuses;
-    this.availableCategories = this.storeService.getAllAvailableCategories;
+    this.availableCategories = this.storeService.getAllAvailableCategories();
   }
 
   private setInitialCategory(): void {

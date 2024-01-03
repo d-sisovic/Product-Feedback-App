@@ -1,11 +1,11 @@
 <div class="container">
   <app-back-header>
-    <app-button label="Edit Feedback" [color]="getButtonColor.BLUE"></app-button>
+    <app-button label="Edit Feedback" [color]="getButtonColor.BLUE" (clickEvent)="onEditFeedback()"></app-button>
   </app-back-header>
 
   @if(selectedCard(); as selectedCard) {
-    <app-card [card]="selectedCard"></app-card>
+  <app-card [card]="selectedCard"></app-card>
 
-    <app-comments-list [comments]="selectedCard.comments || []"></app-comments-list>
+  <app-comments-list [comments]="selectedCard.comments || []"></app-comments-list>
   }
 </div>
