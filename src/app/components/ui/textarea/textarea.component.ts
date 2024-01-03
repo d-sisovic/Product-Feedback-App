@@ -1,20 +1,39 @@
-import { FormControl, Validators } from '@angular/forms';
-import { ButtonComponent } from '../button/button.component';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { createTrimWhitespaceValidator } from '../../../utils/util';
+import { ChangeDetectionStrategy, Component, Input, OnInit, inject } from '@angular/core';
+import { ControlContainer, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-textarea',
   standalone: true,
-  imports: [ButtonComponent],
+  imports: [ReactiveFormsModule],
   templateUrl: './textarea.component.html',
   styleUrl: './textarea.component.scss',
+  viewProviders: [
+    {
+      provide: ControlContainer,
+      useFactory: () => inject(ControlContainer, { skipSelf: true })
+    }
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TextareaComponent {
+export class TextareaComponent implements OnInit {
 
-  public textareaFormControl: FormControl = new FormControl('', [Validators.maxLength(250)]);
+  @Input({ required: true }) maxLength!: number;
+  @Input({ required: true }) controlName: string = '';
 
-  public onSetValue(event: Event): void {
-    this.textareaFormControl.setValue((event.target as HTMLInputElement).value);
+  private readonly formBuilder = inject(FormBuilder);
+  private readonly parentContainer = inject(ControlContainer);
+
+  public formControl!: FormControl;
+
+  public ngOnInit(): void {
+    const validators = [createTrimWhitespaceValidator(), Validators.maxLength(this.maxLength)];
+
+    this.parentFormGroup.addControl(this.controlName, this.formBuilder.control('', validators));
+    this.formControl = this.parentFormGroup.controls[this.controlName] as FormControl;
+  }
+
+  private get parentFormGroup() {
+    return this.parentContainer.control as FormGroup;
   }
 }

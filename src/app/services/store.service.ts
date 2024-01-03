@@ -2,6 +2,7 @@ import { Sort } from '../ts/enums/sort.enum';
 import { IStatus } from '../ts/models/status.model';
 import { Category } from '../ts/enums/category.enum';
 import { ILabelValue } from '../ts/models/label-value.model';
+import { IDataComment } from '../ts/models/data-comment.model';
 import { IFilterStore } from '../ts/models/filter-store.model';
 import { IDataCurrentUser } from '../ts/models/data-current-user.model';
 import { IDataProductRequest } from '../ts/models/data-product-request.model';
@@ -30,8 +31,20 @@ export class StoreService {
     this.filterStore.update(previous => ({ ...previous, [key]: value }));
   }
 
-  public getSelectedCard(cardId: string): IDataProductRequest | null {
-    return this.getCardsStore().find(item => item.id.toString() === cardId) || null;
+  public getSelectedCard(cardId: string): Signal<IDataProductRequest | null> {
+    return computed(() => this.getCardsStore().find(item => item.id.toString() === cardId) || null);
+  }
+
+  public addComment(cardId: string, comment: string): void {
+    this.getCardsStore.update(previous => previous.map(card => {
+      const { id, comments } = card;
+
+      if (cardId !== id.toString()) { return card; }
+
+      const existingComments = comments || [];
+
+      return { ...card, comments: [...existingComments, this.getNewComment(existingComments, comment)] };
+    }));
   }
 
   public get getAllAvailableCategories(): Signal<ILabelValue[]> {
@@ -66,5 +79,15 @@ export class StoreService {
 
   public get getFilterStore(): WritableSignal<IFilterStore> {
     return this.filterStore;
+  }
+
+  private getNewComment(comments: IDataComment[], content: string): IDataComment {
+    return { id: this.getNewCommentId(comments), content, user: this.currentUserStore() as IDataCurrentUser };
+  }
+
+  private getNewCommentId(comments: IDataComment[]): number {
+    if (!comments.length) { return 1; }
+
+    return Math.max(...comments.map(comment => comment.id)) + 1;
   }
 }
