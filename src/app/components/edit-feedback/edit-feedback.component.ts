@@ -6,7 +6,7 @@ import { ButtonColor } from '../ui/button/ts/enums/button-color.enum';
 import { BackHeaderComponent } from '../ui/back-header/back-header.component';
 import { CommentsListComponent } from '../comments-list/comments-list.component';
 import { IDataProductRequest } from '../../ts/models/data-product-request.model';
-import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, Signal, inject } from '@angular/core';
 
 @Component({
   selector: 'app-edit-feedback',
@@ -27,7 +27,7 @@ export class EditFeedbackComponent implements OnInit {
   private readonly storeService = inject(StoreService);
   private readonly activatedRoute = inject(ActivatedRoute);
 
-  public selectedCard!: IDataProductRequest;
+  public selectedCard!: Signal<IDataProductRequest | null>;
 
   public ngOnInit(): void {
     this.setSelectedCard();
@@ -35,14 +35,11 @@ export class EditFeedbackComponent implements OnInit {
 
   private setSelectedCard(): void {
     const cardId = this.activatedRoute.snapshot.params['id'];
-    const selectedCard = this.storeService.getSelectedCard(cardId);
+    this.selectedCard = this.storeService.getSelectedCard(cardId);
 
-    if (selectedCard) {
-      this.selectedCard = selectedCard;
-      return;
+    if (!this.selectedCard()) {
+      this.router.navigateByUrl('');
     }
-
-    this.router.navigateByUrl('');
   }
 
   public get getButtonColor(): typeof ButtonColor {

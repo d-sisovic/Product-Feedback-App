@@ -1,3 +1,4 @@
-<button class="button" [disabled]="disabled" [ngClass]="{'button--blue': color === getButtonColor.BLUE}">
+<button class="button" [disabled]="disabled" [ngClass]="{'button--blue': color === getButtonColor.BLUE}"
+  (click)="onClick()">
   {{label}}
 </button>
