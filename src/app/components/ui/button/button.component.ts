@@ -12,7 +12,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
 })
 export class ButtonComponent {
 
-  @Output() buttonClickEvent = new EventEmitter();
+  @Output() clickEvent = new EventEmitter();
 
   @Input() disabled!: boolean;
   @Input({ required: true }) label!: string;
@@ -21,7 +21,7 @@ export class ButtonComponent {
   public onClick(): void {
     if (this.disabled) { return; }
 
-    this.buttonClickEvent.emit();
+    this.clickEvent.emit();
   }
 
   public get getButtonColor(): typeof ButtonColor {

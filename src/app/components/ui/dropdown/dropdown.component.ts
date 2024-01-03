@@ -1,10 +1,11 @@
+import { TitleCasePipe } from '@angular/common';
 import { ILabelValue } from '../../../ts/models/label-value.model';
 import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, HostListener, Input, Output, inject } from '@angular/core';
 
 @Component({
   selector: 'app-dropdown',
   standalone: true,
-  imports: [],
+  imports: [TitleCasePipe],
   templateUrl: './dropdown.component.html',
   styleUrl: './dropdown.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush

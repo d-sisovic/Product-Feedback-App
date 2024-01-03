@@ -7,6 +7,7 @@ import { BackHeaderComponent } from '../ui/back-header/back-header.component';
 import { CommentsListComponent } from '../comments-list/comments-list.component';
 import { IDataProductRequest } from '../../ts/models/data-product-request.model';
 import { ChangeDetectionStrategy, Component, OnInit, Signal, inject } from '@angular/core';
+import { RoutePath } from '../../ts/enums/route-path.enum';
 
 @Component({
   selector: 'app-edit-feedback',
@@ -40,6 +41,10 @@ export class EditFeedbackComponent implements OnInit {
     if (!this.selectedCard()) {
       this.router.navigateByUrl('');
     }
+  }
+
+  public onEditFeedback(): void {
+    this.router.navigateByUrl(`${RoutePath.EDIT_FEEDBACK}/${this.selectedCard()?.id}`);
   }
 
   public get getButtonColor(): typeof ButtonColor {

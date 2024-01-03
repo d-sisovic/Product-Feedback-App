@@ -1,0 +1,14 @@
+<div class="container">
+  @if(!textareaMode) {
+  <input [placeholder]="placeholder" [formControlName]="controlName"
+    [ngClass]="{'input--error': formControl.hasError('required') && formControl.dirty}">
+
+  @if(formControl.hasError('required') && formControl.dirty) {
+  <span class="error">Can't be empty</span>
+  }
+
+  } @else {
+  <textarea [formControlName]="controlName" [placeholder]="placeholder"
+    [ngClass]="{'textarea--short': shortTextarea}"></textarea>
+  }
+</div>

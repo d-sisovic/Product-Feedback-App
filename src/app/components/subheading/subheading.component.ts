@@ -1,7 +1,8 @@
+import { Router } from '@angular/router';
+import { RoutePath } from '../../ts/enums/route-path.enum';
 import { ButtonComponent } from '../ui/button/button.component';
-import { ILabelValue } from '../../ts/models/label-value.model';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { DropdownComponent } from '../ui/dropdown/dropdown.component';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { SortButtonComponent } from '../ui/sort-button/sort-button.component';
 
 @Component({
@@ -16,4 +17,11 @@ import { SortButtonComponent } from '../ui/sort-button/sort-button.component';
   styleUrl: './subheading.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SubheadingComponent {}
+export class SubheadingComponent {
+
+  private readonly router = inject(Router);
+
+  public onCreateFeedback(): void {
+    this.router.navigateByUrl(RoutePath.CREATE_FEEDBACK);
+  }
+}

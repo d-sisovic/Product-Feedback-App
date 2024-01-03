@@ -2,7 +2,8 @@
   <h3 class="h3">Add Comment</h3>
 
   <div class="textarea">
-    <app-textarea [maxLength]="250" [controlName]="'comment'"></app-textarea>
+    <app-input [controlName]="'comment'" [textareaMode]="true" [shortTextarea]="true"
+      placeholder="Type your comment here"></app-input>
 
     <div class="footer">
       <span class="text3">
@@ -15,7 +16,7 @@
         Characters left
       </span>
 
-      <app-button label="Post Comment" [disabled]="!addCommentForm.valid" (buttonClickEvent)="onAddComment()">
+      <app-button label="Post Comment" [disabled]="!addCommentForm.valid" (clickEvent)="onAddComment()">
       </app-button>
     </div>
   </div>
