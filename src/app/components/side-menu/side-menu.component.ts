@@ -1,6 +1,8 @@
+import { Router } from '@angular/router';
 import { ColorPipe } from '../../pipes/color.pipe';
 import { IStatus } from '../../ts/models/status.model';
 import { NgStyle, TitleCasePipe } from '@angular/common';
+import { RoutePath } from '../../ts/enums/route-path.enum';
 import { StoreService } from '../../services/store.service';
 import { BadgeComponent } from '../ui/badge/badge.component';
 import { UtilUiService } from '../../services/util-ui.service';
@@ -33,6 +35,7 @@ import { ChangeDetectionStrategy, Component, OnInit, Signal, inject } from '@ang
 })
 export class SideMenuComponent implements OnInit {
 
+  private readonly router = inject(Router);
   private readonly storeService = inject(StoreService);
   private readonly utilUiService = inject(UtilUiService);
 
@@ -49,12 +52,6 @@ export class SideMenuComponent implements OnInit {
     this.availableCategories = this.storeService.getAllAvailableCategories();
   }
 
-  private setInitialCategory(): void {
-    const { category } = this.storeService.getFilterStore();
-
-    this.selectedCategory = category;
-  }
-
   public onCloseSideMenu(event: Event): void {
     if (!(event.target as HTMLElement).classList.contains('container')) { return; }
 
@@ -65,5 +62,15 @@ export class SideMenuComponent implements OnInit {
     this.selectedCategory = selectedCategory;
 
     this.storeService.setFilterStoreValue(selectedCategory, 'category');
+  }
+
+  public onViewRoadmap(): void {
+    this.router.navigateByUrl(RoutePath.ROADMAP);
+  }
+
+  private setInitialCategory(): void {
+    const { category } = this.storeService.getFilterStore();
+
+    this.selectedCategory = category;
   }
 }

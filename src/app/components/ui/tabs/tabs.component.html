@@ -1,0 +1,16 @@
+<div class="container">
+  <span class="tab" [ngClass]="{'tab--planned': selectedTab === getSelectedTab.PLANNED}"
+    (click)="onSelectTab(getSelectedTab.PLANNED)">
+    <app-tab-header [label]="'Planned'" [selectedTab]="getSelectedTab.PLANNED"></app-tab-header>
+  </span>
+
+  <span class="tab" [ngClass]="{'tab--in_progress': selectedTab === getSelectedTab.IN_PROGRESS}"
+    (click)="onSelectTab(getSelectedTab.IN_PROGRESS)">
+    <app-tab-header [label]="'In-Progress'" [selectedTab]="getSelectedTab.IN_PROGRESS"></app-tab-header>
+  </span>
+
+  <span class="tab" [ngClass]="{'tab--live': selectedTab === getSelectedTab.LIVE}"
+    (click)="onSelectTab(getSelectedTab.LIVE)">
+    <app-tab-header [label]="'Live'" [selectedTab]="getSelectedTab.LIVE"></app-tab-header>
+  </span>
+</div>

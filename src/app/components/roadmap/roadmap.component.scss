@@ -1,0 +1,31 @@
+@use "../../../styles/variables";
+
+.container {
+  min-height: 100vh;
+  background: variables.$gray-2;
+
+  .content {
+    padding: 2.4rem;
+
+    .header {
+      font-size: 1.8rem;
+      font-style: normal;
+      margin-bottom: 2.4rem;
+      letter-spacing: -0.25px;
+      font-family: "Jost-Bold";
+      color: variables.$dark-blue-2;
+
+      .text3 {
+        font-weight: 400;
+        margin-top: 0.4rem;
+        color: variables.$gray-dark;
+      }
+    }
+
+    .body {
+      gap: 1.6rem;
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}
