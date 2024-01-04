@@ -1,0 +1,33 @@
+@use "../../../../../styles/variables";
+
+.container {
+  height: 10rem;
+  display: flex;
+  align-items: center;
+  padding: 2.6rem 2.4rem;
+  justify-content: space-between;
+  background: variables.$dark-blue;
+
+  .back {
+    gap: 0.3rem;
+    display: flex;
+    font-size: 1.3rem;
+    font-style: normal;
+    line-height: normal;
+    flex-direction: column;
+    color: variables.$white;
+    font-family: "Jost-Bold";
+
+    .roadmap {
+      font-size: 1.8rem;
+    }
+
+    span {
+      &:first-child {
+        gap: 1.6rem;
+        align-items: center;
+        display: inline-flex;
+      }
+    }
+  }
+}

@@ -1,0 +1,18 @@
+@use "../../../../styles/variables";
+
+.container {
+  gap: 0.8rem;
+  display: flex;
+  align-items: center;
+
+  .img {
+    width: 0.8rem;
+    height: 0.8rem;
+    border-radius: 100%;
+    display: inline-block;
+  }
+
+  .label {
+    color: variables.$gray-dark;
+  }
+}
