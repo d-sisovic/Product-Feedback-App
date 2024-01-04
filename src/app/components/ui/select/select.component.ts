@@ -1,9 +1,8 @@
 import { NgClass, TitleCasePipe } from '@angular/common';
-import { StoreService } from '../../../services/store.service';
 import { DropdownComponent } from '../dropdown/dropdown.component';
 import { ILabelValue } from '../../../ts/models/label-value.model';
 import { trigger, state, style, transition, animate } from '@angular/animations';
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnInit, Output, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, Output, signal } from '@angular/core';
 
 @Component({
   selector: 'app-select',
@@ -28,23 +27,15 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnI
     ])
   ]
 })
-export class SelectComponent implements OnInit, OnChanges {
+export class SelectComponent implements OnChanges {
 
   @Output() setSelectedValue = new EventEmitter();
 
   @Input() preselectedValue!: string | null;
-
-  private readonly storeService = inject(StoreService);
+  @Input() dropdownValues: ILabelValue[] = [];
 
   public showDropdown!: boolean;
-  public dropdownValues: ILabelValue[] = [];
-
   public selectedDropdownItem = signal<ILabelValue | null>(null);
-
-  public ngOnInit(): void {
-    this.dropdownValues = this.storeService.getAllAvailableCategories(false)();
-    this.setInitialSelectedValue();
-  }
 
   public ngOnChanges(): void {
     this.setDropdownItemOnChanges();
@@ -59,21 +50,24 @@ export class SelectComponent implements OnInit, OnChanges {
     this.onToggleDropdown();
   }
 
-  private setInitialSelectedValue(): void {
-    const [firstDropdownItem] = this.dropdownValues;
-    this.setDropdownItem(firstDropdownItem);
-  }
-
   private setDropdownItemOnChanges(): void {
-    const matchingItem = this.dropdownValues.find(item => item.value === this.preselectedValue);
-
-    if (!matchingItem) { return; }
-
-    this.setDropdownItem(matchingItem);
+    this.setDropdownItem(this.getMatchingDropdownItem);
   }
 
   private setDropdownItem(item: ILabelValue): void {
+    if (!item) { return; }
+
     this.selectedDropdownItem.set(item);
     this.setSelectedValue.emit(item.value);
+  }
+
+  private get getMatchingDropdownItem(): ILabelValue {
+    const matchingItem = this.dropdownValues.find(item => item.value === this.preselectedValue);
+
+    if (matchingItem) { return matchingItem; }
+
+    const [firstDropdownItem] = this.dropdownValues;
+
+    return firstDropdownItem;
   }
 }

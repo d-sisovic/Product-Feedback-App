@@ -25,9 +25,22 @@
 
         <span class="text3">Choose a category for your feedback</span>
 
-        <app-select (setSelectedValue)="onSetCategory($event)" [preselectedValue]="selectedCard()?.category || null">
+        <app-select (setSelectedValue)="onSetCategory($event)" [dropdownValues]="categoryDropdownValues()"
+          [preselectedValue]="selectedCard()?.category || null">
         </app-select>
       </div>
+
+      @if(!isAddMode) {
+      <div class="form__item">
+        <p class="text3">Update Status</p>
+
+        <span class="text3">Change feature state</span>
+
+        <app-select (setSelectedValue)="onSetStatus($event)" [dropdownValues]="statusDropdownValues()"
+          [preselectedValue]="selectedCard()?.status || null">
+        </app-select>
+      </div>
+      }
 
       <div class="form__item">
         <p class="text3">Feedback Detail</p>
@@ -39,10 +52,17 @@
     </form>
 
     <div class="footer">
-      <app-button label="Add Feedback" [disabled]="!createEditFeedbackForm.valid"
-        (clickEvent)="onSubmit()"></app-button>
+      @if(isAddMode) {
+      <app-button label="Add Feedback" [disabled]="!createEditFeedbackForm.valid" (clickEvent)="onCreateFeedback()" />
+      } @else {
+      <app-button label="Save Changes" [disabled]="formDisabled$ | async" (clickEvent)="onEditFeedback()" />
+      }
 
-      <app-button label="Cancel" [color]="getButtonColor.GRAY" (clickEvent)="onCancel()"></app-button>
+      <app-button label="Cancel" [color]="getButtonColor.GRAY" (clickEvent)="onCancel()" />
+
+      @if(!isAddMode) {
+      <app-button label="Delete" [color]="getButtonColor.RED" (clickEvent)="onDelete()" />
+      }
     </div>
   </div>
 </div>

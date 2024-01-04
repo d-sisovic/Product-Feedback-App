@@ -43,8 +43,9 @@ export class StoreService {
       if (cardId !== id.toString()) { return card; }
 
       const existingComments = comments || [];
+      const newComment = this.getNewComment(existingComments, comment);
 
-      return { ...card, comments: [...existingComments, this.getNewComment(existingComments, comment)] };
+      return { ...card, comments: [...existingComments, newComment] };
     }));
   }
 
@@ -52,21 +53,32 @@ export class StoreService {
     const allCategory = includeAll ? [{ label: Category.ALL, value: Category.ALL }] : [];
 
     return computed(() => {
-      const categories = this.getCardsStore().reduce((accumulator, item) => {
-        const { category } = item;
-        const matchingItem = accumulator.find(existingItem => existingItem.value === category);
-
-        if (matchingItem) { return accumulator; }
-
-        return [...accumulator, { label: category, value: category }];
-      }, [] as ILabelValue[]);
+      const categories = Array
+        .from(new Set(this.getCardsStore().map(item => item.category)))
+        .map(value => ({ label: value, value }));
 
       return [...allCategory, ...categories];
     });
   }
 
   public createFeedback(value: IFeedbackForm): void {
-    this.cardsStore.update(previous => ([this.getNewFeedback(previous, value), ...previous]));
+    this.getCardsStore.update(previous => ([this.getNewFeedback(previous, value), ...previous]));
+  }
+
+  public deleteFeedback(feedbackId: number): void {
+    this.getCardsStore.update(previous => previous.filter(item => item.id !== feedbackId));
+  }
+
+  public editFeedback(feedbackId: number, formValues: IFeedbackForm): void {
+    const { title, detail, status, category } = formValues;
+
+    this.getCardsStore.update(previous => previous.map(item => {
+      const { id } = item;
+
+      if (feedbackId !== id) { return item; }
+
+      return { ...item, title, description: detail, status, category };
+    }));
   }
 
   public get getAvailableStatuses(): Signal<IStatus[]> {
@@ -78,6 +90,10 @@ export class StoreService {
 
       return accumulator.map(item => item.label !== matchingItem.label ? item : ({ ...item, quantity: item.quantity + 1 }));
     }, [] as IStatus[]));
+  }
+
+  public get getAvailableStatusesInDropdown(): Signal<ILabelValue[]> {
+    return computed(() => this.getAvailableStatuses().map(statusItem => ({ label: statusItem.label, value: statusItem.label })));
   }
 
   public get getCardsStore(): WritableSignal<IDataProductRequest[]> {

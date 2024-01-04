@@ -12,6 +12,7 @@ export class CreateEditFeedbackService {
 
   public buildForm(): FormGroup {
     return this.formBuilder.group({
+      status: ['', []],
       category: ['', []]
     });
   }

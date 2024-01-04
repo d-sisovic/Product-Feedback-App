@@ -14,7 +14,7 @@ export class ButtonComponent {
 
   @Output() clickEvent = new EventEmitter();
 
-  @Input() disabled!: boolean;
+  @Input() disabled!: boolean | null;
   @Input({ required: true }) label!: string;
   @Input() color: ButtonColor = ButtonColor.PURPLE;
 

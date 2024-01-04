@@ -12,6 +12,7 @@
   border-radius: 1rem;
   color: variables.$gray;
   padding: 1.05rem 1.7rem;
+  font-family: "Jost-Regular";
   background: variables.$purple;
 
   &:disabled {
@@ -35,6 +36,14 @@
 
     &:hover {
       background: #656EA3;
+    }
+  }
+
+  &--red {
+    background: #D73737;
+
+    &:hover {
+      background: #E98888;
     }
   }
 }
