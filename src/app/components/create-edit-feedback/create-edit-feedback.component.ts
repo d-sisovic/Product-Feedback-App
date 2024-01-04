@@ -1,20 +1,26 @@
+import { AsyncPipe } from '@angular/common';
+import { Observable, map, startWith } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RoutePath } from '../../ts/enums/route-path.enum';
 import { StoreService } from '../../services/store.service';
 import { InputComponent } from '../ui/input/input.component';
+import { ILabelValue } from '../../ts/models/label-value.model';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { SelectComponent } from '../ui/select/select.component';
 import { ButtonComponent } from '../ui/button/button.component';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { IFeedbackForm } from '../../ts/models/feedback-form.model';
 import { ButtonColor } from '../ui/button/ts/enums/button-color.enum';
 import { BackHeaderComponent } from '../ui/back-header/back-header.component';
 import { IDataProductRequest } from '../../ts/models/data-product-request.model';
 import { CreateEditFeedbackService } from './services/create-edit-feedback.service';
-import { AfterViewInit, ChangeDetectionStrategy, Component, OnInit, inject, signal } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, DestroyRef, OnInit, Signal, inject, signal } from '@angular/core';
 
 @Component({
   selector: 'app-create-edit-feedback',
   standalone: true,
   imports: [
+    AsyncPipe,
     InputComponent,
     SelectComponent,
     ButtonComponent,
@@ -28,15 +34,22 @@ import { AfterViewInit, ChangeDetectionStrategy, Component, OnInit, inject, sign
 export class CreateEditFeedbackComponent implements OnInit, AfterViewInit {
 
   private readonly router = inject(Router);
+  private readonly destroyRef = inject(DestroyRef);
   private readonly storeService = inject(StoreService);
   private readonly activatedRoute = inject(ActivatedRoute);
   private readonly createEditFeedbackService = inject(CreateEditFeedbackService);
 
   public isAddMode!: boolean;
   public createEditFeedbackForm!: FormGroup;
+  public formDisabled$!: Observable<boolean>;
+  public statusDropdownValues!: Signal<ILabelValue[]>;
+  public categoryDropdownValues!: Signal<ILabelValue[]>;
+
   public selectedCard = signal<IDataProductRequest | null>(null);
 
   public ngOnInit(): void {
+    this.setDropdownValues();
+
     this.buildForm();
     this.setIsAddMode();
   }
@@ -45,25 +58,9 @@ export class CreateEditFeedbackComponent implements OnInit, AfterViewInit {
     this.handleSetFormValues();
   }
 
-  public onSetCategory(category: string): void {
-    this.createEditFeedbackForm.patchValue({ category });
-  }
-
-  public onCancel(): void {
-    this.router.navigateByUrl('');
-  }
-
-  public onSubmit(): void {
-    const { valid, value } = this.createEditFeedbackForm;
-
-    if (!valid) { return; }
-
-    this.storeService.createFeedback(value);
-    this.onCancel();
-  }
-
-  public get getButtonColor(): typeof ButtonColor {
-    return ButtonColor;
+  private setDropdownValues(): void {
+    this.statusDropdownValues = this.storeService.getAvailableStatusesInDropdown;
+    this.categoryDropdownValues = this.storeService.getAllAvailableCategories(false);
   }
 
   private handleSetFormValues(): void {
@@ -76,6 +73,7 @@ export class CreateEditFeedbackComponent implements OnInit, AfterViewInit {
 
     if (matchingCard) {
       this.setFormValues();
+      this.watchFormChanges();
       return;
     }
 
@@ -83,9 +81,29 @@ export class CreateEditFeedbackComponent implements OnInit, AfterViewInit {
   }
 
   private setFormValues(): void {
-    const { title, description, category } = this.selectedCard() as IDataProductRequest;
+    this.createEditFeedbackForm.setValue(this.getFormValuesFromCard);
+  }
 
-    this.createEditFeedbackForm.setValue({ title, category, detail: description });
+  private watchFormChanges(): void {
+    const initialFormValues = JSON.stringify(this.getFormValuesFromCard);
+
+    this.formDisabled$ = this.createEditFeedbackForm.valueChanges
+      .pipe(
+        startWith(this.createEditFeedbackForm.value),
+        takeUntilDestroyed(this.destroyRef),
+        map(formValues => {
+          const formInvalid = !this.createEditFeedbackForm.valid;
+          const formUnchanged = JSON.stringify(formValues) === initialFormValues;
+
+          return formInvalid || formUnchanged;
+        })
+      );
+  }
+
+  private get getFormValuesFromCard(): IFeedbackForm {
+    const { status, category, title, description } = this.selectedCard() as IDataProductRequest;
+
+    return { status, category, title, detail: description };
   }
 
   private setIsAddMode(): void {
@@ -94,5 +112,44 @@ export class CreateEditFeedbackComponent implements OnInit, AfterViewInit {
 
   private buildForm(): void {
     this.createEditFeedbackForm = this.createEditFeedbackService.buildForm();
+  }
+
+  public onSetCategory(category: string): void {
+    this.createEditFeedbackForm.patchValue({ category });
+  }
+
+  public onSetStatus(status: string): void {
+    this.createEditFeedbackForm.patchValue({ status });
+  }
+
+  public onCancel(): void {
+    this.router.navigateByUrl('');
+  }
+
+  public onDelete(): void {
+    const { id } = this.selectedCard() as IDataProductRequest;
+
+    this.storeService.deleteFeedback(id);
+    this.onCancel();
+  }
+
+  public onEditFeedback(): void {
+    const { id } = this.selectedCard() as IDataProductRequest;
+
+    this.storeService.editFeedback(id, this.createEditFeedbackForm.value);
+    this.onCancel();
+  }
+
+  public onCreateFeedback(): void {
+    const { valid, value } = this.createEditFeedbackForm;
+
+    if (!valid) { return; }
+
+    this.storeService.createFeedback(value);
+    this.onCancel();
+  }
+
+  public get getButtonColor(): typeof ButtonColor {
+    return ButtonColor;
   }
 }
