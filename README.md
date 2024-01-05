@@ -34,8 +34,8 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: []
-- Live Site URL: []
+- Solution URL: [https://www.frontendmentor.io/solutions/product-feedback-app-angular-v17-signals-mW9PXUdO5w]
+- Live Site URL: [https://d-sisovic.github.io/Product-Feedback-App/]
 
 ## My process
 
