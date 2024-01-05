@@ -1,3 +1,3 @@
-<span class="badge" [ngClass]="{'badge--active': selected}" (click)="onSelect()">
+<span class="badge" [ngClass]="{'badge--active': selected, 'badge--readonly': readonly}" (click)="onSelect()">
   {{label | titlecase}}
 </span>

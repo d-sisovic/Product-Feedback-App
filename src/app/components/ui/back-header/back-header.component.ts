@@ -1,5 +1,4 @@
-import { Router } from '@angular/router';
-import { Location } from '@angular/common';
+import { UtilUiService } from '../../../services/util-ui.service';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 
 @Component({
@@ -12,15 +11,9 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 })
 export class BackHeaderComponent {
 
-  private readonly router = inject(Router);
-  private readonly location = inject(Location);
+  private readonly utilUiService = inject(UtilUiService);
 
   public onGoBack(): void {
-    if (this.router.navigated) {
-      this.location.back();
-      return;
-    }
-
-    this.router.navigateByUrl('');
+    this.utilUiService.goBack();
   }
 }

@@ -3,6 +3,7 @@
 
 .badge {
   gap: 1rem;
+  cursor: pointer;
   border-radius: 1rem;
   display: inline-flex;
   background: #F2F4FE;
@@ -20,6 +21,19 @@
     display: inline-flex;
     justify-content: center;
   }
+
+  &--voted {
+    cursor: default;
+    background: variables.$blue;
+
+    .label {
+      color: variables.$white;
+    }
+  }
+
+  &:hover:not(.badge--voted) {
+    background: #CFD7FF;
+  }
 }
 
 @include breakpoints.mq(tablet) {
@@ -31,5 +45,11 @@
       flex-direction: column;
       padding: 1.16rem 0.9rem 0.8rem 0.9rem;
     }
+  }
+}
+
+@include breakpoints.mq(desktop) {
+  .badge {
+    padding: 1.1rem 1.25rem 1rem 1.6rem;
   }
 }

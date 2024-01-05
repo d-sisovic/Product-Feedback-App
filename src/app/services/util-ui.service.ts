@@ -1,10 +1,15 @@
+import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 import { ISort } from '../ts/models/sort.model';
-import { Injectable, Signal, WritableSignal, computed, signal } from '@angular/core';
+import { Injectable, Signal, WritableSignal, computed, inject, signal } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UtilUiService {
+
+  private readonly router = inject(Router);
+  private readonly location = inject(Location);
 
   private sideMenuVisible: WritableSignal<boolean> = signal(false);
   private innerWidth: WritableSignal<number> = signal(window.innerWidth);
@@ -15,12 +20,21 @@ export class UtilUiService {
     this.innerWidth.set(innerWidth);
   }
 
-  public get isTabletDesktopWidth(): Signal<boolean> {
-    return computed(() => this.innerWidth() >= 768);
-  }
-
   public toggleSideMenuVisibility(): void {
     this.sideMenuVisible.update(previous => !previous);
+  }
+
+  public goBack(): void {
+    if (this.router.navigated) {
+      this.location.back();
+      return;
+    }
+
+    this.router.navigateByUrl('');
+  }
+
+  public get isTabletDesktopWidth(): Signal<boolean> {
+    return computed(() => this.innerWidth() >= 768);
   }
 
   public get getSideMenuVisible(): WritableSignal<boolean> {

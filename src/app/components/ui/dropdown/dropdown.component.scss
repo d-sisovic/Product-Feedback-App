@@ -47,3 +47,9 @@
     }
   }
 }
+
+@include breakpoints.mq(desktop) {
+  .container {
+    top: calc(100% + 1.6rem);
+  }
+}

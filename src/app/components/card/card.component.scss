@@ -2,9 +2,14 @@
 @use "../../../styles/breakpoints";
 
 .container {
+  cursor: pointer;
   padding: 2.4rem;
   border-radius: 1rem;
   background: variables.$white;
+
+  &--readonly {
+    cursor: default;
+  }
 
   .text3 {
     font-family: "Jost-Bold";

@@ -1,7 +1,7 @@
-<div class="container" (click)="onEditFeedback()">
+<div class="container" [ngClass]="{'container--readonly': readonly}" (click)="onEditFeedback()">
   @if (isTabletDesktopWidth()) {
     <div class="container__badge">
-      <app-badge-upvote [value]="card.upvotes"></app-badge-upvote>
+      <app-badge-upvote [card]="card"></app-badge-upvote>
     </div>
   }
 
@@ -13,7 +13,7 @@
       <p class="text3 description">{{description}}</p>
       }
 
-      <app-badge [label]="card.category" [value]="card.category"></app-badge>
+      <app-badge [label]="card.category" [value]="card.category" [readonly]="readonly"></app-badge>
     </div>
 
     @if (isTabletDesktopWidth()) {
@@ -25,7 +25,7 @@
 
   @if (!isTabletDesktopWidth()) {
   <div class="container__footer">
-    <app-badge-upvote [value]="card.upvotes"></app-badge-upvote>
+    <app-badge-upvote [card]="card"></app-badge-upvote>
 
     <app-badge-comment [numberOfComments]="(card.comments || []).length"></app-badge-comment>
   </div>

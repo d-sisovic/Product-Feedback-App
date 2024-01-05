@@ -1,6 +1,7 @@
 @use "../../../../styles/variables";
 
 .badge {
+  cursor: pointer;
   font-weight: 600;
   font-size: 1.3rem;
   border-radius: 1rem;
@@ -8,6 +9,10 @@
   color: variables.$blue;
   padding: 0.6rem 1.6rem;
   background: variables.$gray;
+
+  &--readonly {
+    cursor: default;
+  }
 
   &--active {
     color: variables.$white;
