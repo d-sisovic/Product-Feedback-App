@@ -1,24 +1,32 @@
-<div class="container">
-  <div class="header">
-    <div class="profile">
-      <img [src]="'assets/images/user-images/' + comment.user.image" alt="user image">
+<div class="container" [ngClass]="{'container--line': $any(comment)?.replies?.length}">
+  @if(isTabletDesktopWidth()) {
+    <img [src]="'assets/images/user-images/' + comment.user.image" alt="user image" class="user">
+  }
 
-      <div class="profile__user">
-        <h3 class="name">{{comment.user.name}}</h3>
-        <p class="username">&#64;{{comment.user.username}}</p>
+  <div class="container__content">
+    <div class="header">
+      <div class="profile">
+        @if(!isTabletDesktopWidth()) {
+          <img [src]="'assets/images/user-images/' + comment.user.image" alt="user image" class="user">
+        }
+
+        <div class="profile__user">
+          <h3 class="name">{{comment.user.name}}</h3>
+          <p class="username">&#64;{{comment.user.username}}</p>
+        </div>
       </div>
+
+      <p class="reply">Reply</p>
     </div>
 
-    <p class="reply">Reply</p>
+    <p class="body text3">
+      @if(replyMode) {
+        <span class="replying">&#64;{{$any(comment).replyingTo}}</span>
+      }
+
+      {{comment.content}}
+    </p>
   </div>
-
-  <p class="body text3">
-    @if(replyMode) {
-      <span class="replying">&#64;{{$any(comment).replyingTo}}</span>
-    }
-
-    {{comment.content}}
-  </p>
 </div>
 
 @defer {
@@ -30,5 +38,3 @@
     </div>
     }
 }
-
-

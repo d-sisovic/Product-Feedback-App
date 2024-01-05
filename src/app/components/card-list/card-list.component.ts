@@ -6,7 +6,7 @@ import { FilterStorePipe } from '../../pipes/filter-store.pipe';
 import { IFilterStore } from '../../ts/models/filter-store.model';
 import { IDataProductRequest } from '../../ts/models/data-product-request.model';
 import { EmptyCardListComponent } from '../empty-card-list/empty-card-list.component';
-import { ChangeDetectionStrategy, Component, OnInit, WritableSignal, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, Signal, inject } from '@angular/core';
 
 @Component({
   selector: 'app-card-list',
@@ -26,9 +26,9 @@ export class CardListComponent implements OnInit {
   private readonly storeService = inject(StoreService);
   private readonly utilUiService = inject(UtilUiService);
 
-  public showSideMenu!: WritableSignal<boolean>;
-  public filterStore!: WritableSignal<IFilterStore>;
-  public cardData!: WritableSignal<IDataProductRequest[]>;
+  public showSideMenu!: Signal<boolean>;
+  public filterStore!: Signal<IFilterStore>;
+  public cardData!: Signal<IDataProductRequest[]>;
 
   public ngOnInit(): void {
     this.cardData = this.storeService.getCardsStore;

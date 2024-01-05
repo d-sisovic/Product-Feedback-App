@@ -81,6 +81,10 @@ export class StoreService {
     }));
   }
 
+  public get getSuggestionsCount(): Signal<number> {
+    return computed(() => this.getAvailableStatuses().find(statusItem => statusItem.label === 'suggestion')?.quantity || 0);
+  }
+
   public get getAvailableStatuses(): Signal<IStatus[]> {
     return computed(() => this.getCardsStore().reduce((accumulator, item) => {
       const { status } = item;

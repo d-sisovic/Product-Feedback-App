@@ -1,5 +1,5 @@
 import { ISort } from '../ts/models/sort.model';
-import { Injectable, WritableSignal, signal } from '@angular/core';
+import { Injectable, Signal, WritableSignal, computed, signal } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
@@ -7,8 +7,17 @@ import { Injectable, WritableSignal, signal } from '@angular/core';
 export class UtilUiService {
 
   private sideMenuVisible: WritableSignal<boolean> = signal(false);
+  private innerWidth: WritableSignal<number> = signal(window.innerWidth);
 
   constructor() { }
+
+  public setInnerWidth(innerWidth: number): void {
+    this.innerWidth.set(innerWidth);
+  }
+
+  public get isTabletDesktopWidth(): Signal<boolean> {
+    return computed(() => this.innerWidth() >= 768);
+  }
 
   public toggleSideMenuVisibility(): void {
     this.sideMenuVisible.update(previous => !previous);

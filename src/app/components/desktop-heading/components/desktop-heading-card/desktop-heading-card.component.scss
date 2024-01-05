@@ -1,0 +1,18 @@
+@use "../../../../../styles/variables";
+
+.container {
+  display: flex;
+  width: 22.3rem;
+  height: 17.8rem;
+  padding: 2.4rem;
+  border-radius: 1rem;
+  flex-direction: column;
+  color: variables.$white;
+  justify-content: flex-end;
+  background-repeat: no-repeat;
+  background-image: url("/assets/images/suggestions/tablet/background-header.png");
+
+  .text2 {
+    color: rgba(variables.$white, 0.75);
+  }
+}

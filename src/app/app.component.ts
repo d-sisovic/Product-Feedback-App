@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
+import { UtilUiService } from './services/util-ui.service';
 import { CardHttpService } from './services/card-http.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { ChangeDetectionStrategy, Component, DestroyRef, OnInit, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, HostListener, OnInit, inject } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -14,11 +15,17 @@ import { ChangeDetectionStrategy, Component, DestroyRef, OnInit, inject } from '
 })
 export class AppComponent implements OnInit {
 
+  @HostListener('window:resize', ['$event'])
+  onResize() {
+    this.utilUiService.setInnerWidth(window.innerWidth);
+  }
+
   private readonly destroyRef = inject(DestroyRef);
+  private readonly utilUiService = inject(UtilUiService);
   private readonly cardHttpService = inject(CardHttpService);
 
   public ngOnInit(): void {
-      this.cardHttpService.fetchDataUrl$()
+    this.cardHttpService.fetchDataUrl$()
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe();
   }

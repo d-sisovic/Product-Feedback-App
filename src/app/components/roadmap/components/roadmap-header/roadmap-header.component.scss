@@ -1,4 +1,5 @@
 @use "../../../../../styles/variables";
+@use "../../../../../styles/breakpoints";
 
 .container {
   height: 10rem;
@@ -27,6 +28,22 @@
         gap: 1.6rem;
         align-items: center;
         display: inline-flex;
+      }
+    }
+  }
+}
+
+@include breakpoints.mq(tablet) {
+  .container {
+    height: auto;
+    border-radius: 1rem;
+    padding: 2.7rem 3.2rem;
+
+    .back {
+      font-size: 1.4rem;
+
+      .roadmap {
+        font-size: 2.4rem;
       }
     }
   }

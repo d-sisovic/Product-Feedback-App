@@ -1,8 +1,15 @@
-<app-heading></app-heading>
-<app-subheading></app-subheading>
+<div class="container">
+  @if(!isTabletDesktopWidth()) {
+    <app-heading></app-heading>
+  } @else {
+    <app-desktop-heading></app-desktop-heading>
+  }
 
-@if(showSideMenu()) {
+  <app-subheading></app-subheading>
+
+  @if(showSideMenu()) {
   <app-side-menu></app-side-menu>
-}
+  }
 
-<app-card-list></app-card-list>
+  <app-card-list></app-card-list>
+</div>
