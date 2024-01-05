@@ -10,5 +10,10 @@
     letter-spacing: -0.194px;
     color: variables.$dark-blue-2;
   }
+}
 
+@include breakpoints.mq(desktop) {
+  span {
+    font-size: 1.8rem;
+  }
 }

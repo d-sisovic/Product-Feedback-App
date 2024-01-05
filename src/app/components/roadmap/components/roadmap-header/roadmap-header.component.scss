@@ -26,8 +26,13 @@
     span {
       &:first-child {
         gap: 1.6rem;
+        cursor: pointer;
         align-items: center;
         display: inline-flex;
+
+        &:hover {
+          text-decoration: underline;
+        }
       }
     }
   }
@@ -46,5 +51,12 @@
         font-size: 2.4rem;
       }
     }
+  }
+}
+
+@include breakpoints.mq(desktop) {
+  .container {
+    width: 111rem;
+    margin: 0 auto;
   }
 }

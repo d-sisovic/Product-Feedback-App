@@ -2,16 +2,32 @@
 @use "../../../styles/breakpoints";
 
 .container {
-  gap: 2.4rem;
-  display: flex;
-  padding: 2.4rem;
-  min-height: 100vh;
-  flex-direction: column;
   background: variables.$gray-2;
+
+  .body {
+    gap: 2.4rem;
+    display: flex;
+    padding: 2.4rem;
+    min-height: 100vh;
+    flex-direction: column;
+  }
 }
 
 @include breakpoints.mq(tablet) {
   .container {
-    padding: 5.6rem 4rem 12rem 4rem;
+    .body {
+      padding: 5.6rem 4rem 12rem 4rem;
+    }
+  }
+}
+
+@include breakpoints.mq(desktop) {
+  .container {
+    .body {
+      width: 73rem;
+      margin: 0 auto;
+      padding-top: 8rem;
+      padding-bottom: 12.9rem;
+    }
   }
 }

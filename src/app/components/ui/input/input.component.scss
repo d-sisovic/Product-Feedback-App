@@ -26,7 +26,9 @@ $error-color: #D73737;
   }
 
   textarea {
+    resize: none;
     border: none;
+    cursor: pointer;
     min-height: 12rem;
     padding: 1.6rem 2.4rem 1.6rem 1.6rem;
   }

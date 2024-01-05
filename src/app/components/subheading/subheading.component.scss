@@ -33,3 +33,9 @@
     }
   }
 }
+
+@include breakpoints.mq(desktop) {
+  .container {
+    margin-top: 0;
+  }
+}

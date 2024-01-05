@@ -1,4 +1,5 @@
 @use "../../../../../styles/variables";
+@use "../../../../../styles/breakpoints";
 
 .container {
   display: flex;
@@ -14,5 +15,13 @@
 
   .text2 {
     color: rgba(variables.$white, 0.75);
+  }
+}
+
+@include breakpoints.mq(desktop) {
+  .container {
+    width: 100%;
+    height: 13.7rem;
+    background-image: url("/assets/images/suggestions/desktop/background-header.png");
   }
 }

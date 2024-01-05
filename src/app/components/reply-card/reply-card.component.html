@@ -1,0 +1,7 @@
+<form [formGroup]="replyForm" class="container">
+  <div class="input">
+    <app-input [controlName]="'reply'" [textareaMode]="true"></app-input>
+  </div>
+
+  <app-button label="Post Reply" [disabled]="!replyForm.valid" (clickEvent)="onPostReply()"></app-button>
+</form>

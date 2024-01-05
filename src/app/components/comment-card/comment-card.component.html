@@ -1,40 +1,47 @@
-<div class="container" [ngClass]="{'container--line': $any(comment)?.replies?.length}">
-  @if(isTabletDesktopWidth()) {
+<div class="wrapper" [ngClass]="{'wrapper--line': $any(comment)?.replies?.length}">
+  <div class="container">
+    @if(isTabletDesktopWidth()) {
     <img [src]="'assets/images/user-images/' + comment.user.image" alt="user image" class="user">
-  }
+    }
 
-  <div class="container__content">
-    <div class="header">
-      <div class="profile">
-        @if(!isTabletDesktopWidth()) {
+    <div class="container__content">
+      <div class="header">
+        <div class="profile">
+          @if(!isTabletDesktopWidth()) {
           <img [src]="'assets/images/user-images/' + comment.user.image" alt="user image" class="user">
-        }
+          }
 
-        <div class="profile__user">
-          <h3 class="name">{{comment.user.name}}</h3>
-          <p class="username">&#64;{{comment.user.username}}</p>
+          <div class="profile__user">
+            <h3 class="name">{{comment.user.name}}</h3>
+            <p class="username">&#64;{{comment.user.username}}</p>
+          </div>
         </div>
+
+        <p class="reply" (click)="onOpenReply()">Reply</p>
       </div>
 
-      <p class="reply">Reply</p>
-    </div>
-
-    <p class="body text3">
-      @if(replyMode) {
+      <p class="body text3">
+        @if(replyMode) {
         <span class="replying">&#64;{{$any(comment).replyingTo}}</span>
-      }
+        }
 
-      {{comment.content}}
-    </p>
-  </div>
-</div>
-
-@defer {
-  @if ($any(comment).replies; as replies) {
-    <div class="replies">
-      @for(reply of replies; track reply) {
-      <app-comment-card [comment]="reply" [replyMode]="true"></app-comment-card>
-      }
+        {{comment.content}}
+      </p>
     </div>
+  </div>
+
+  @if(addReply) {
+  <app-reply-card [replyingTo]="comment.user.username" [commentId]="commentId"
+    (addReplyEvent)="onCloseReply()"></app-reply-card>
+  }
+
+  @defer {
+  @if ($any(comment).replies; as replies) {
+  <div class="replies">
+    @for(reply of replies; track reply) {
+    <app-comment-card [comment]="reply" [commentId]="commentId" [replyMode]="true"></app-comment-card>
     }
-}
+  </div>
+  }
+  }
+</div>

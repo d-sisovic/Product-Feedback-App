@@ -1,7 +1,11 @@
-<div class="badge" [ngClass]="{'badge--column': !rowUpvote}">
+<div class="badge" [ngClass]="{'badge--column': !rowUpvote, 'badge--voted': userAlreadyVote()}" (click)="onUpvote($event)">
   <span class="img">
-    <img src="assets/images/shared/icon-arrow-up.svg" alt="icon-arrow-up">
+    @if(!userAlreadyVote()) {
+      <img src="assets/images/shared/icon-arrow-up.svg" alt="icon-arrow-up">
+    } @else {
+      <img src="assets/images/shared/icon-arrow-up-white.svg" alt="icon-arrow-up-white">
+    }
   </span>
 
-  <span class="label">{{value}}</span>
+  <span class="label">{{card.upvotes}}</span>
 </div>

@@ -14,6 +14,7 @@ import { Injectable, Signal, WritableSignal, computed, signal } from '@angular/c
 })
 export class StoreService {
 
+  private upvotesStore: WritableSignal<string[]> = signal([]);
   private cardsStore: WritableSignal<IDataProductRequest[]> = signal([]);
   private currentUserStore: WritableSignal<IDataCurrentUser | null> = signal(null);
   private filterStore: WritableSignal<IFilterStore> = signal<IFilterStore>({ category: Category.ALL, sort: Sort.MOST_UPVOTES });
@@ -34,6 +35,17 @@ export class StoreService {
 
   public getSelectedCard(cardId: string): Signal<IDataProductRequest | null> {
     return computed(() => this.getCardsStore().find(item => item.id.toString() === cardId) || null);
+  }
+
+  public setUpvote(cardId: number): void {
+    // Addes card id to upvotes record
+    this.upvotesStore.update(previous => [...previous, cardId.toString()]);
+
+    this.getCardsStore.update(previous => previous.map(card => {
+      if (card.id !== cardId) { return card; }
+
+      return { ...card, upvotes: card.upvotes + 1 };
+    }));
   }
 
   public addComment(cardId: string, comment: string): void {
@@ -78,6 +90,29 @@ export class StoreService {
       if (feedbackId !== id) { return item; }
 
       return { ...item, title, description: detail, status, category };
+    }));
+  }
+
+  public didUserAlreadyVote(cardId: number): Signal<boolean> {
+    return computed(() => this.upvotesStore().some(upvoteId => upvoteId === cardId.toString()));
+  }
+
+  public addReply(cardId: string, commentId: number, replyingTo: string, reply: string): void {
+    this.getCardsStore.update(previous => previous.map(item => {
+      const { id, comments } = item;
+
+      if (cardId !== id.toString()) { return item; }
+
+      const user = this.currentUserStore() as IDataCurrentUser;
+      const newComments = (comments as IDataComment[]).map(comment => {
+        if (comment.id !== commentId) { return comment; }
+
+        const newReply = { content: reply, user, replyingTo };
+
+        return { ...comment, replies: [...(comment.replies || []), newReply] };
+      })
+
+      return { ...item, comments: newComments };
     }));
   }
 

@@ -17,6 +17,7 @@ export class BadgeComponent {
   @Output() selectBadge = new EventEmitter<string>();
 
   @Input() selected!: boolean;
+  @Input() readonly!: boolean;
   @Input({ required: true }) label!: string;
   @Input({ required: true }) value!: string;
 

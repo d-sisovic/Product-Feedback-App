@@ -15,6 +15,4 @@ import { DesktopHeadingCardComponent } from './components/desktop-heading-card/d
   styleUrl: './desktop-heading.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DesktopHeadingComponent {
-
-}
+export class DesktopHeadingComponent {}

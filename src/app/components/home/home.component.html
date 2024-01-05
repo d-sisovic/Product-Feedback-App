@@ -1,15 +1,17 @@
 <div class="container">
   @if(!isTabletDesktopWidth()) {
-    <app-heading></app-heading>
+  <app-heading></app-heading>
   } @else {
-    <app-desktop-heading></app-desktop-heading>
+  <app-desktop-heading></app-desktop-heading>
   }
 
-  <app-subheading></app-subheading>
+  <div class="container__card">
+    <app-subheading></app-subheading>
 
-  @if(showSideMenu()) {
-  <app-side-menu></app-side-menu>
-  }
+    @if(showSideMenu()) {
+    <app-side-menu></app-side-menu>
+    }
 
-  <app-card-list></app-card-list>
+    <app-card-list></app-card-list>
+  </div>
 </div>

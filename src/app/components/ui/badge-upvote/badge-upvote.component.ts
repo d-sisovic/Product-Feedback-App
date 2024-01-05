@@ -1,5 +1,7 @@
 import { NgClass } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { StoreService } from '../../../services/store.service';
+import { IDataProductRequest } from '../../../ts/models/data-product-request.model';
+import { ChangeDetectionStrategy, Component, Input, OnInit, Signal, inject } from '@angular/core';
 
 @Component({
   selector: 'app-badge-upvote',
@@ -9,8 +11,24 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
   styleUrl: './badge-upvote.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class BadgeUpvoteComponent {
+export class BadgeUpvoteComponent implements OnInit {
 
   @Input() rowUpvote!: boolean;
-  @Input({ required: true }) value!: number;
+  @Input({ required: true }) card!: IDataProductRequest;
+
+  private readonly storeService = inject(StoreService);
+
+  public userAlreadyVote!: Signal<boolean>;
+
+  public ngOnInit(): void {
+    this.userAlreadyVote = this.storeService.didUserAlreadyVote(this.card.id);
+  }
+
+  public onUpvote(event: Event): void {
+    event.stopPropagation();
+
+    if (this.userAlreadyVote()) { return; }
+
+    this.storeService.setUpvote(this.card.id);
+  }
 }

@@ -1,4 +1,5 @@
 import { Router } from '@angular/router';
+import { NgClass } from '@angular/common';
 import { RoutePath } from '../../ts/enums/route-path.enum';
 import { BadgeComponent } from '../ui/badge/badge.component';
 import { UtilUiService } from '../../services/util-ui.service';
@@ -11,6 +12,7 @@ import { ChangeDetectionStrategy, Component, Input, OnInit, Signal, inject } fro
   selector: 'app-card',
   standalone: true,
   imports: [
+    NgClass,
     BadgeComponent,
     BadgeUpvoteComponent,
     BadgeCommentComponent
@@ -21,6 +23,7 @@ import { ChangeDetectionStrategy, Component, Input, OnInit, Signal, inject } fro
 })
 export class CardComponent implements OnInit {
 
+  @Input() readonly!: boolean;
   @Input({ required: true }) card!: IDataProductRequest;
 
   private readonly router = inject(Router);

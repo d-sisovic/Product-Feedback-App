@@ -58,3 +58,22 @@
     }
   }
 }
+
+@include breakpoints.mq(desktop) {
+  .container {
+    padding: 3.2rem;
+    padding-top: 2.5rem;
+
+    .title {
+      font-size: 1.8rem;
+      margin-top: 0.8rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .text3 {
+      font-size: 1.6rem;
+      line-height: 1.438;
+      margin-bottom: 1.6rem;
+    }
+  }
+}

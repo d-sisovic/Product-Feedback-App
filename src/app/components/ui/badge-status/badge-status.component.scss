@@ -23,3 +23,12 @@
     gap: 1.6rem;
   }
 }
+
+@include breakpoints.mq(desktop) {
+  .container {
+    .label {
+      font-size: 1.6rem;
+      line-height: 1.438;
+    }
+  }
+}

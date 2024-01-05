@@ -7,3 +7,18 @@
     padding: 5.6rem 4rem 11.3rem 4rem;
   }
 }
+
+@include breakpoints.mq(desktop) {
+  .container {
+    gap: 3rem;
+    display: flex;
+    padding-top: 9.4rem;
+    justify-content: center;
+    padding-bottom: 12.9rem;
+    align-items: flex-start;
+
+    &__card {
+      width: 82.5rem;
+    }
+  }
+}

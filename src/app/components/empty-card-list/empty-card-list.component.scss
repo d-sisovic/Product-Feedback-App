@@ -48,3 +48,9 @@
     }
   }
 }
+
+@include breakpoints.mq(desktop) {
+  .container {
+    width: 82.5rem;
+  }
+}

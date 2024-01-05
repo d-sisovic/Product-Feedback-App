@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { RoutePath } from '../../ts/enums/route-path.enum';
 import { StoreService } from '../../services/store.service';
 import { InputComponent } from '../ui/input/input.component';
+import { UtilUiService } from '../../services/util-ui.service';
 import { ILabelValue } from '../../ts/models/label-value.model';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { SelectComponent } from '../ui/select/select.component';
@@ -36,6 +37,7 @@ export class CreateEditFeedbackComponent implements OnInit, AfterViewInit {
   private readonly router = inject(Router);
   private readonly destroyRef = inject(DestroyRef);
   private readonly storeService = inject(StoreService);
+  private readonly utilUiService = inject(UtilUiService);
   private readonly activatedRoute = inject(ActivatedRoute);
   private readonly createEditFeedbackService = inject(CreateEditFeedbackService);
 
@@ -123,7 +125,7 @@ export class CreateEditFeedbackComponent implements OnInit, AfterViewInit {
   }
 
   public onCancel(): void {
-    this.router.navigateByUrl('');
+    this.utilUiService.goBack();
   }
 
   public onDelete(): void {
