@@ -1,7 +1,0 @@
-<div class="container">
-  @for(category of availableCategories(); track category.value) {
-  <app-badge [label]="category.label" [value]="category.value" [selected]="selectedCategory === category.value"
-    (selectBadge)="onSetBadge($event)">
-  </app-badge>
-  }
-</div>
