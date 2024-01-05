@@ -1,11 +1,14 @@
-import { TitleCasePipe } from '@angular/common';
+import { NgClass, TitleCasePipe } from '@angular/common';
 import { ILabelValue } from '../../../ts/models/label-value.model';
 import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, HostListener, Input, Output, inject } from '@angular/core';
 
 @Component({
   selector: 'app-dropdown',
   standalone: true,
-  imports: [TitleCasePipe],
+  imports: [
+    NgClass,
+    TitleCasePipe
+  ],
   templateUrl: './dropdown.component.html',
   styleUrl: './dropdown.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -28,6 +31,7 @@ export class DropdownComponent {
   @Output() closeDropdownEvent = new EventEmitter();
 
   @Input() selectedValue!: string;
+  @Input() topHeaderOffset!: boolean;
   @Input({ required: true }) dropdownValues: ILabelValue[] = [];
 
   private firstClick: boolean = true;

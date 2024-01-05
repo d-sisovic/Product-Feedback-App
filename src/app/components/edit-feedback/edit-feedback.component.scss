@@ -1,4 +1,5 @@
 @use "../../../styles/variables";
+@use "../../../styles/breakpoints";
 
 .container {
   gap: 2.4rem;
@@ -7,4 +8,10 @@
   min-height: 100vh;
   flex-direction: column;
   background: variables.$gray-2;
+}
+
+@include breakpoints.mq(tablet) {
+  .container {
+    padding: 5.6rem 4rem 12rem 4rem;
+  }
 }

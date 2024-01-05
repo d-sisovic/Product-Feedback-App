@@ -1,14 +1,13 @@
-import { Router } from '@angular/router';
 import { ColorPipe } from '../../pipes/color.pipe';
-import { IStatus } from '../../ts/models/status.model';
 import { NgStyle, TitleCasePipe } from '@angular/common';
-import { RoutePath } from '../../ts/enums/route-path.enum';
-import { StoreService } from '../../services/store.service';
 import { BadgeComponent } from '../ui/badge/badge.component';
 import { UtilUiService } from '../../services/util-ui.service';
 import { ILabelValue } from '../../ts/models/label-value.model';
+import { SideMenuRoadmapPipe } from './pipes/side-menu-roadmap.pipe';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
-import { ChangeDetectionStrategy, Component, OnInit, Signal, inject } from '@angular/core';
+import { RoadmapSummaryComponent } from '../roadmap-summary/roadmap-summary.component';
+import { CategoryFilterComponent } from '../category-filter/category-filter.component';
 
 @Component({
   selector: 'app-side-menu',
@@ -17,7 +16,10 @@ import { ChangeDetectionStrategy, Component, OnInit, Signal, inject } from '@ang
     NgStyle,
     ColorPipe,
     TitleCasePipe,
-    BadgeComponent
+    BadgeComponent,
+    SideMenuRoadmapPipe,
+    RoadmapSummaryComponent,
+    CategoryFilterComponent
   ],
   templateUrl: './side-menu.component.html',
   styleUrl: './side-menu.component.scss',
@@ -33,44 +35,15 @@ import { ChangeDetectionStrategy, Component, OnInit, Signal, inject } from '@ang
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SideMenuComponent implements OnInit {
+export class SideMenuComponent {
 
-  private readonly router = inject(Router);
-  private readonly storeService = inject(StoreService);
   private readonly utilUiService = inject(UtilUiService);
 
-  public selectedCategory!: string;
   public categories!: ILabelValue[];
-
-  public matchingStatuses!: Signal<IStatus[]>;
-  public availableCategories!: Signal<ILabelValue[]>;
-
-  public ngOnInit(): void {
-    this.setInitialCategory();
-
-    this.matchingStatuses = this.storeService.getAvailableStatuses;
-    this.availableCategories = this.storeService.getAllAvailableCategories();
-  }
 
   public onCloseSideMenu(event: Event): void {
     if (!(event.target as HTMLElement).classList.contains('container')) { return; }
 
     this.utilUiService.toggleSideMenuVisibility();
-  }
-
-  public onSetBadge(selectedCategory: string): void {
-    this.selectedCategory = selectedCategory;
-
-    this.storeService.setFilterStoreValue(selectedCategory, 'category');
-  }
-
-  public onViewRoadmap(): void {
-    this.router.navigateByUrl(RoutePath.ROADMAP);
-  }
-
-  private setInitialCategory(): void {
-    const { category } = this.storeService.getFilterStore();
-
-    this.selectedCategory = category;
   }
 }

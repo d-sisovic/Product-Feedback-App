@@ -1,15 +1,33 @@
 <div class="container" (click)="onEditFeedback()">
-  <h1 class="text3">{{card.title}}</h1>
-
-  @if(card.description; as description) {
-    <p class="text3 description">{{description}}</p>
+  @if (isTabletDesktopWidth()) {
+    <div class="container__badge">
+      <app-badge-upvote [value]="card.upvotes"></app-badge-upvote>
+    </div>
   }
 
-  <app-badge [label]="card.category" [value]="card.category"></app-badge>
+  <div class="container__body">
+    <div>
+      <h1 class="text3">{{card.title}}</h1>
 
+      @if(card.description; as description) {
+      <p class="text3 description">{{description}}</p>
+      }
+
+      <app-badge [label]="card.category" [value]="card.category"></app-badge>
+    </div>
+
+    @if (isTabletDesktopWidth()) {
+    <div>
+      <app-badge-comment [numberOfComments]="(card.comments || []).length"></app-badge-comment>
+    </div>
+    }
+  </div>
+
+  @if (!isTabletDesktopWidth()) {
   <div class="container__footer">
     <app-badge-upvote [value]="card.upvotes"></app-badge-upvote>
 
     <app-badge-comment [numberOfComments]="(card.comments || []).length"></app-badge-comment>
   </div>
+  }
 </div>

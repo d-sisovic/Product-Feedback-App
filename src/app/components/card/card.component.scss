@@ -1,4 +1,5 @@
 @use "../../../styles/variables";
+@use "../../../styles/breakpoints";
 
 .container {
   padding: 2.4rem;
@@ -22,5 +23,42 @@
     margin-top: 1.6rem;
     align-items: center;
     justify-content: space-between;
+  }
+}
+
+@include breakpoints.mq(tablet) {
+  .container {
+    display: flex;
+    padding: 2.8rem 3.2rem;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    h1.text3 {
+      font-size: 1.8rem;
+      line-height: 1.445;
+    }
+
+    .description {
+      font-size: 1.6rem;
+      margin-top: 0.4rem;
+      line-height: 1.438;
+      margin-bottom: 1.2rem;
+    }
+
+    &__badge {
+      min-width: 8rem;
+    }
+
+    &__body {
+      flex: 1;
+      gap: 2.4rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    &__footer {
+      margin-top: 0;
+    }
   }
 }

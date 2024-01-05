@@ -1,5 +1,5 @@
 import { UtilUiService } from '../../services/util-ui.service';
-import { ChangeDetectionStrategy, Component, OnInit, WritableSignal, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, Signal, inject } from '@angular/core';
 
 @Component({
   selector: 'app-heading',
@@ -13,7 +13,7 @@ export class HeadingComponent implements OnInit {
 
   public utilUiService = inject(UtilUiService);
 
-  public showSideMenu!: WritableSignal<boolean>;
+  public showSideMenu!: Signal<boolean>;
 
   public ngOnInit(): void {
     this.showSideMenu = this.utilUiService.getSideMenuVisible;

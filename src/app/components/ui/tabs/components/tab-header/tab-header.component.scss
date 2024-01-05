@@ -1,0 +1,14 @@
+@use "../../../../../../styles/variables";
+@use "../../../../../../styles/breakpoints";
+
+@include breakpoints.mq(tablet) {
+  span {
+    font-size: 1.4rem;
+    display: inline-block;
+    margin-bottom: 0.4rem;
+    font-family: "Jost-Bold";
+    letter-spacing: -0.194px;
+    color: variables.$dark-blue-2;
+  }
+
+}

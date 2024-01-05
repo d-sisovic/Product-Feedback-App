@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" [ngClass]="{'container--toffset': topHeaderOffset}">
   @for(dropdownValue of dropdownValues; track dropdownValue.value) {
   <div class="container__item" (click)="onSelectItem(dropdownValue)">
     <div class="container__label">{{dropdownValue.label | titlecase}}</div>

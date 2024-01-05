@@ -1,0 +1,9 @@
+@use "../../../styles/variables";
+@use "../../../styles/breakpoints";
+
+@include breakpoints.mq(tablet) {
+  .container {
+    background: variables.$gray-2;
+    padding: 5.6rem 4rem 11.3rem 4rem;
+  }
+}

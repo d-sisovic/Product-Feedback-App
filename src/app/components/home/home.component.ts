@@ -3,7 +3,8 @@ import { HeadingComponent } from '../heading/heading.component';
 import { CardListComponent } from '../card-list/card-list.component';
 import { SideMenuComponent } from '../side-menu/side-menu.component';
 import { SubheadingComponent } from '../subheading/subheading.component';
-import { ChangeDetectionStrategy, Component, OnInit, WritableSignal, inject } from '@angular/core';
+import { DesktopHeadingComponent } from '../desktop-heading/desktop-heading.component';
+import { ChangeDetectionStrategy, Component, OnInit, Signal, inject } from '@angular/core';
 
 @Component({
   selector: 'app-home',
@@ -12,7 +13,8 @@ import { ChangeDetectionStrategy, Component, OnInit, WritableSignal, inject } fr
     HeadingComponent,
     SideMenuComponent,
     CardListComponent,
-    SubheadingComponent
+    SubheadingComponent,
+    DesktopHeadingComponent
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
@@ -22,9 +24,11 @@ export class HomeComponent implements OnInit {
 
   private readonly utilUiService = inject(UtilUiService);
 
-  public showSideMenu!: WritableSignal<boolean>;
+  public showSideMenu!: Signal<boolean>;
+  public isTabletDesktopWidth!: Signal<boolean>;
 
   public ngOnInit(): void {
     this.showSideMenu = this.utilUiService.getSideMenuVisible;
+    this.isTabletDesktopWidth = this.utilUiService.isTabletDesktopWidth;
   }
 }

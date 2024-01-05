@@ -1,4 +1,5 @@
 @use "../../../styles/variables";
+@use "../../../styles/breakpoints";
 
 :host {
   flex: 1;
@@ -27,5 +28,23 @@
   .text3 {
     margin-bottom: 2.4rem;
     color: variables.$gray-dark;
+  }
+}
+
+@include breakpoints.mq(tablet) {
+  .container {
+    padding: 11rem 17rem;
+
+    img {
+      margin-bottom: 5.4rem;
+    }
+
+    .h3 {
+      margin-bottom: 1.6rem;
+    }
+
+    .text3 {
+      margin-bottom: 4.8rem;
+    }
   }
 }
