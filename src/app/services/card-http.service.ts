@@ -18,13 +18,13 @@ export class CardHttpService {
 
   public fetchDataUrl$(): Observable<IDataResponse> {
     return this.http.get<IDataResponse>(this.dataUrl)
-    .pipe(
-      tap(response => {
+      .pipe(
+        tap(response => {
           const { currentUser, productRequests } = response;
 
           this.storeService.setCurrentUser(currentUser);
           this.storeService.setCardsStore(productRequests);
-      })
-    );
+        })
+      );
   }
 }
