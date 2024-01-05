@@ -17,7 +17,7 @@ export class StoreService {
   private upvotesStore: WritableSignal<string[]> = signal([]);
   private cardsStore: WritableSignal<IDataProductRequest[]> = signal([]);
   private currentUserStore: WritableSignal<IDataCurrentUser | null> = signal(null);
-  private filterStore: WritableSignal<IFilterStore> = signal<IFilterStore>({ category: Category.ALL, sort: Sort.MOST_UPVOTES });
+  private filterStore: WritableSignal<IFilterStore> = signal<IFilterStore>(this.getInitialFilterStore);
 
   constructor() { }
 
@@ -139,8 +139,12 @@ export class StoreService {
     return this.cardsStore;
   }
 
-  public get getFilterStore(): WritableSignal<IFilterStore> {
+  public get getFilterStore(): Signal<IFilterStore> {
     return this.filterStore;
+  }
+
+  private get getInitialFilterStore(): IFilterStore {
+    return { category: Category.ALL, sort: Sort.MOST_UPVOTES };
   }
 
   private getNewFeedback(cardData: IDataProductRequest[], value: IFeedbackForm): IDataProductRequest {
