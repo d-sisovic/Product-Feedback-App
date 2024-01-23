@@ -12,4 +12,10 @@ describe('StoreService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+
+  it('should reject voting if already voted', () => {
+    service.upvotesStore.set(['777']);
+
+    expect(service.didUserAlreadyVote(777)()).toBe(true);
+  });
 });

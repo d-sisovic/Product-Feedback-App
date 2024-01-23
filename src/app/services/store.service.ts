@@ -14,7 +14,7 @@ import { Injectable, Signal, WritableSignal, computed, signal } from '@angular/c
 })
 export class StoreService {
 
-  private upvotesStore: WritableSignal<string[]> = signal([]);
+  public upvotesStore: WritableSignal<string[]> = signal([]);
   private cardsStore: WritableSignal<IDataProductRequest[]> = signal([]);
   private currentUserStore: WritableSignal<IDataCurrentUser | null> = signal(null);
   private filterStore: WritableSignal<IFilterStore> = signal<IFilterStore>(this.getInitialFilterStore);
