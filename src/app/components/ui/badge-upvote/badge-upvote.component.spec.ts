@@ -1,12 +1,12 @@
 import { BadgeUpvoteComponent } from './badge-upvote.component';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 describe('BadgeUpvoteComponent', () => {
   let component: BadgeUpvoteComponent;
   let fixture: ComponentFixture<BadgeUpvoteComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
       imports: [BadgeUpvoteComponent]
     })
     .compileComponents();
@@ -23,7 +23,7 @@ describe('BadgeUpvoteComponent', () => {
     };
 
     fixture.detectChanges();
-  });
+  }));
 
   it('should create', () => {
     expect(component).toBeTruthy();

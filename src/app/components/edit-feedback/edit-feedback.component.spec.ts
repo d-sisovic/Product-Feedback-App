@@ -1,13 +1,13 @@
 import { RouterTestingModule } from '@angular/router/testing';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { EditFeedbackComponent } from './edit-feedback.component';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 describe('EditFeedbackComponent', () => {
   let component: EditFeedbackComponent;
   let fixture: ComponentFixture<EditFeedbackComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
       imports: [
         RouterTestingModule,
         EditFeedbackComponent
@@ -18,7 +18,7 @@ describe('EditFeedbackComponent', () => {
     fixture = TestBed.createComponent(EditFeedbackComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  });
+  }));
 
   it('should create', () => {
     expect(component).toBeTruthy();

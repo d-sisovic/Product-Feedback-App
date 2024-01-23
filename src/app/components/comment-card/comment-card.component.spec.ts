@@ -1,12 +1,12 @@
 import { CommentCardComponent } from './comment-card.component';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 describe('CommentCardComponent', () => {
   let component: CommentCardComponent;
   let fixture: ComponentFixture<CommentCardComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
       imports: [CommentCardComponent]
     })
     .compileComponents();
@@ -24,7 +24,7 @@ describe('CommentCardComponent', () => {
     };
 
     fixture.detectChanges();
-  });
+  }));
 
   it('should create', () => {
     expect(component).toBeTruthy();

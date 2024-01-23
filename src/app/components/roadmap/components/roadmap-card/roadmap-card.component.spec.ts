@@ -1,12 +1,12 @@
 import { RoadmapCardComponent } from './roadmap-card.component';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 describe('RoadmapCardComponent', () => {
   let component: RoadmapCardComponent;
   let fixture: ComponentFixture<RoadmapCardComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
       imports: [RoadmapCardComponent]
     })
     .compileComponents();
@@ -23,7 +23,7 @@ describe('RoadmapCardComponent', () => {
     };
 
     fixture.detectChanges();
-  });
+  }));
 
   it('should create', () => {
     expect(component).toBeTruthy();

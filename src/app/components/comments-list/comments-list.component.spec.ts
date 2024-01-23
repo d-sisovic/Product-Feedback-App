@@ -1,13 +1,13 @@
 import { RouterTestingModule } from '@angular/router/testing';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CommentsListComponent } from './comments-list.component';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 describe('CommentsListComponent', () => {
   let component: CommentsListComponent;
   let fixture: ComponentFixture<CommentsListComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
       imports: [
         RouterTestingModule,
         CommentsListComponent
@@ -30,7 +30,7 @@ describe('CommentsListComponent', () => {
     ];
 
     fixture.detectChanges();
-  });
+  }));
 
   it('should create', () => {
     expect(component).toBeTruthy();

@@ -1,21 +1,20 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { EmptyCardListComponent } from './empty-card-list.component';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 describe('EmptyCardListComponent', () => {
   let component: EmptyCardListComponent;
   let fixture: ComponentFixture<EmptyCardListComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
       imports: [EmptyCardListComponent]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(EmptyCardListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  });
+  }));
 
   it('should create', () => {
     expect(component).toBeTruthy();
