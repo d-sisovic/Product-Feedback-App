@@ -16,7 +16,7 @@ export class CardHttpService {
 
   constructor() { }
 
-  public fetchDataUrl$(): Observable<IDataResponse> {
+  public fetchData$(): Observable<IDataResponse> {
     return this.http.get<IDataResponse>(this.dataUrl)
       .pipe(
         tap(response => {

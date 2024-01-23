@@ -25,7 +25,7 @@ export class AppComponent implements OnInit {
   private readonly cardHttpService = inject(CardHttpService);
 
   public ngOnInit(): void {
-    this.cardHttpService.fetchDataUrl$()
+    this.cardHttpService.fetchData$()
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe();
   }
