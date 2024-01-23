@@ -1,6 +1,5 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { BadgeUpvoteComponent } from './badge-upvote.component';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 describe('BadgeUpvoteComponent', () => {
   let component: BadgeUpvoteComponent;
@@ -11,9 +10,18 @@ describe('BadgeUpvoteComponent', () => {
       imports: [BadgeUpvoteComponent]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(BadgeUpvoteComponent);
     component = fixture.componentInstance;
+    component.card = {
+      id: 1,
+      title: "Test card",
+      category: "enhancement",
+      upvotes: 112,
+      status: "suggestion",
+      description: ""
+    };
+
     fixture.detectChanges();
   });
 

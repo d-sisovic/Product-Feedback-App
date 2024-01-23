@@ -1,6 +1,5 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { RoadmapCardComponent } from './roadmap-card.component';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 describe('RoadmapCardComponent', () => {
   let component: RoadmapCardComponent;
@@ -11,9 +10,18 @@ describe('RoadmapCardComponent', () => {
       imports: [RoadmapCardComponent]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(RoadmapCardComponent);
     component = fixture.componentInstance;
+    component.card = {
+      id: 1,
+      title: "Test card",
+      category: "enhancement",
+      upvotes: 112,
+      status: "suggestion",
+      description: ""
+    };
+
     fixture.detectChanges();
   });
 

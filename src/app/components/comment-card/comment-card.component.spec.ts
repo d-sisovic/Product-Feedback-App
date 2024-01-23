@@ -1,6 +1,5 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { CommentCardComponent } from './comment-card.component';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 describe('CommentCardComponent', () => {
   let component: CommentCardComponent;
@@ -11,9 +10,19 @@ describe('CommentCardComponent', () => {
       imports: [CommentCardComponent]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(CommentCardComponent);
     component = fixture.componentInstance;
+    component.comment = {
+      id: 1,
+      content: "",
+      user: {
+        image: "",
+        name: "Daniel",
+        username: "siskoftn"
+      }
+    };
+
     fixture.detectChanges();
   });
 

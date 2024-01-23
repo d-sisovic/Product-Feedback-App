@@ -1,5 +1,6 @@
 import { SubheadingComponent } from './subheading.component';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('SubheadingComponent', () => {
   let component: SubheadingComponent;
@@ -7,7 +8,10 @@ describe('SubheadingComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SubheadingComponent]
+      imports: [
+        SubheadingComponent,
+        NoopAnimationsModule
+      ]
     })
     .compileComponents();
 

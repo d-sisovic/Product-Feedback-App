@@ -1,5 +1,6 @@
 import { SideMenuComponent } from './side-menu.component';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('SideMenuComponent', () => {
   let component: SideMenuComponent;
@@ -7,7 +8,10 @@ describe('SideMenuComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SideMenuComponent]
+      imports: [
+        SideMenuComponent,
+        NoopAnimationsModule
+      ]
     })
     .compileComponents();
 
